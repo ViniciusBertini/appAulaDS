@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "Montserrat";
+    src: url("../libs/Montserrat/Montserrat-Light.ttf") format("ttf"),
+        /* 300 */
+        url("../libs/Montserrat/Montserrat-Regular.ttf") format("ttf"),
+        /* 400 */
+        url("../libs/Montserrat/Montserrat-Medium.ttf") format("ttf"),
+        /* 500 */
+        url("../libs/Montserrat/Montserrat-Bold.ttf") format("ttf");
+        /* 700 */
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    color: #2D2F3A;
+}
+
+h2 {
+    font-size: 2.8em;
+    font-weight: 700;
+}
+h3 {
+    font-size: 2em;
+    font-weight: 400;
+    letter-spacing: -2px;
+}
+p {
+    font-size: 1em;
+    font-weight: 300;
+}
+label {
+    margin-bottom: -5px;
+}
