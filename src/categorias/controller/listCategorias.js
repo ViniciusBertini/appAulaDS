@@ -27,7 +27,7 @@ $(document).ready(function() {
                 "serchable": false,
                 "className": "text-center",
                 "render": function(data, type, row, meta) {
-                    return data == 'S' ? 'Ativo' : 'Não Ativo'
+                    return data == 's' ? 'Ativo' : 'Não Ativo'
                 }
             },
             {
@@ -37,9 +37,9 @@ $(document).ready(function() {
                 "className": "text-center",
                 "render": function(data, type, row, meta) {
                     return `
-                    <button id="${data}" class="btn btn-info btn-sm btn-view"><i class="mdi mdi-eye"></i></button>
-                    <button id="${data}" class="btn btn-primary btn-sm btn-edit"><i class="mdi mdi-pencil"></i></button>
-                    <button id="${data}" class="btn btn-danger btn-sm btn-delete"><i class="mdi mdi-trash-can"></i></button>
+                    <button id="${data}" class="botao botao-azul botao-pequeno btn-view"><i class="mdi mdi-eye"></i></button>
+                    <button id="${data}" class="botao botao-amarelo botao-pequeno btn-edit"><i class="mdi mdi-pencil"></i></button>
+                    <button id="${data}" class="botao botao-vermelho botao-pequeno btn-delete"><i class="mdi mdi-trash-can"></i></button>
                     `
                 }
             }

@@ -4,7 +4,6 @@ $(document).ready(function() {
 
         $('.modal-title').empty()
         $('.modal-body').empty()
-
         $('.modal-title').append('Adicionar nova categoria')
 
         const datacriacao = new Date().toLocaleString()
@@ -12,9 +11,7 @@ $(document).ready(function() {
         $('.modal-body').load('src/categorias/view/formCategorias.html', function() {
             $('#dataagora').val(datacriacao)
         })
-
         $('.btn-save').show()
-
         $('#modalCategoria').modal('show')
     })
 })

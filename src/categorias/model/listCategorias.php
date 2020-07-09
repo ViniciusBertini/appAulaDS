@@ -2,58 +2,46 @@
     include('../../banco/conn.php');
     include('categorias.php');
 
-    if(false){
+    $categorias = new Categorias();
+    if ($categorias->listCategorias('')) {
+        $linhas = $categorias->listCategorias('');
+        $complemento = '';
 
-        $requestData = $_REQUEST;
-
-        $colunas = $requestData['columns'];
-
-        $sql = "SELECT idcategoria, nome, date_format(datamodificacao,'%d/%m/%Y %H:%i:%s') as datamodificacao, ativo FROM categorias WHERE 1=1 ";
-        $resultado = mysqli_query($conexao, $sql);
-        $qtdeLinhas = mysqli_num_rows($resultado);
-
-        $filtro = $requestData['search']['value'];
+        $filtro = $_REQUEST['search']['value'];
         if(!empty($filtro)){
-
-            $sql .= " AND (idcategoria LIKE '$filtro%' ";
-            $sql .= " OR nome LIKE '$filtro%') ";
+            $complemento .= " AND (idcategoria LIKE '$filtro%' ";
+            $complemento .= " OR nome LIKE '$filtro%') ";
+            $dados = $categorias->listCategorias($complemento);
+            $totalFiltrados = count($dados);
+        } else {
+            $totalFiltrados = count($linhas);
         }
 
-        $resultado = mysqli_query($conexao, $sql);
-        $totalFiltrados = mysqli_num_rows($resultado);
-
-        $colunaOrdem = $requestData['order'][0]['column'];
+        $colunas = $_REQUEST['columns'];
+        $colunaOrdem = $_REQUEST['order'][0]['column'];
         $ordem = $colunas[$colunaOrdem]['data'];
-        $direcao = $requestData['order'][0]['dir'];
+        $direcao = $_REQUEST['order'][0]['dir'];
 
-        $inicio = $requestData['start'];
-        $tamanho = $requestData['length'];
+        $inicio = $_REQUEST['start'];
+        $tamanho = $_REQUEST['length'];
 
-        $sql .= " ORDER BY $ordem $direcao LIMIT $inicio, $tamanho";
-
-        $resultado = mysqli_query($conexao, $sql);
-
-        $dados = array();
-        while($linha = mysqli_fetch_assoc($resultado)){
-            $dados[] = array_map('utf8_encode', $linha);
-        }
+        $complemento .= " ORDER BY $ordem $direcao LIMIT $inicio, $tamanho";
+        $dados = $categorias->listCategorias($complemento);
 
         $json_data = array(
-            "draw" => intval($requestData['draw']),
-            "recordsTotal" => intval($qtdeLinhas),
-            "recordsFiltered" => intval($totalFiltrados),
+            "draw" => intval($_REQUEST['draw']),
+            "recordsTotal" => count($linhas),
+            "recordsFiltered" => 5,
             "data" => $dados
         ); 
 
-        mysqli_close($conexao);
-
-    } else{
-       $json_data = array(
-           "draw" => 0,
-           "recordsTotal" => 0,
-           "recordsFiltered" => 0,
-           "data" => array()
-       ); 
+    } else {
+        $json_data = array(
+            "draw" => 0,
+            "recordsTotal" => 0,
+            "recordsFiltered" => 0,
+            "data" => array()
+        ); 
     }
 
 echo json_encode($json_data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);

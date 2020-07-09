@@ -35,16 +35,20 @@ class Categorias {
         }
     }
 
-    public function listCategorias() {
+    public function listCategorias($complemento) {
         $connection = new Conn();
         $conn = $connection->getConn();
-
-        $sql = "SELECT * FROM categorias";
+        
+        $sql = "SELECT * FROM categorias WHERE 1=1";
+        
+        if (isset($complemento)) {
+            $sql .= $complemento;
+        }
 
         try {
             $stmt = $conn->query($sql);
             while ($dado = $stmt->fetch_assoc()) {
-                $resultado[] = $dado;
+                $resultado[] = array_map('utf8_encode', $dado);
             }
             if (!isset($resultado)) {
                 unset($resultado);

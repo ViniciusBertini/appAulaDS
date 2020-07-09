@@ -31,3 +31,40 @@ p {
 label {
     margin-bottom: -5px;
 }
+.botao {
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+}
+.botao:focus {
+    outline: 0;
+}
+.botao-pequeno {
+    padding: 5px 10px;
+}
+.botao .mdi {
+    color: white;
+    font-size: 1em;
+}
+.botao-verde {
+    background-color: #2ecc71;
+    box-shadow: 0 0 25px -5px #2ecc71;
+}
+.botao-azul {
+    background-color: #3498db;
+    box-shadow: 0 0 25px -5px #3498db;
+}
+.botao-amarelo {
+    background-color: #f1c40f;
+    box-shadow: 0 0 25px -5px #f1c40f;
+}
+.botao-vermelho {
+    background-color: #e74c3c;
+    box-shadow: 0 0 25px -5px #e74c3c;
+}
+.page-item.active .page-link {
+    background-color: #2ecc71;
+    box-shadow: 0 0 25px -5px #2ecc71;
+    border-color: #2ecc71;
+}
