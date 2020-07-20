@@ -28,7 +28,7 @@ class Categorias {
             $stmt->execute();
             return true;
         } catch (Exception $erro) {
-            $this->erro = $erro;
+            $this->erro = $erro->getMessage();
             return false;
         } finally {
             $conn->close();
@@ -48,16 +48,71 @@ class Categorias {
         try {
             $stmt = $conn->query($sql);
             while ($dado = $stmt->fetch_assoc()) {
-                $resultado[] = array_map('utf8_encode', $dado);
+                $result[] = array_map('utf8_encode', $dado);
             }
-            if (!isset($resultado)) {
-                unset($resultado);
+            if (!isset($result)) {
+                unset($result);
                 return false;
             } else {
-                return $resultado;
+                return $result;
             }
         } catch (Exception $erro) {
-            $this->erro = $erro;
+            $this->erro = $erro->getMessage();
+            return false;
+        } finally {
+            $conn->close();
+        }
+    }
+
+    public function viewCategorias() {
+        $connection = new Conn();
+        $conn = $connection->getConn();
+
+        $sql = "SELECT * FROM categorias WHERE idcategoria = ".$this->idcategoria;
+
+        try {
+            $stmt = $conn->query($sql);
+            $dado = $stmt->fetch_assoc();
+            $result = array_map('utf8_encode', $dado);
+            return $result;
+        } catch (Exception $erro) {
+            $this->erro = $erro->getMessage();
+            return false;
+        } finally {
+            $conn->close();
+        }
+    }
+
+    public function updateCategorias() {
+        $connection = new Conn();
+        $conn = $connection->getConn();
+
+        $sql = "UPDATE categorias SET nome = ?, ativo = ?, datamodificacao = ? WHERE idcategoria = ?";
+
+        try {
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('sssi', $this->nome, $this->ativo, $this->datamodificacao, $this->idcategoria);
+            $stmt->execute();
+            return true;
+        } catch (Exception $erro) {
+            $this->erro = $erro->getMessage();
+            return false;
+        } finally {
+            $conn->close();
+        }
+    }
+
+    public function delCategorias() {
+        $connection = new Conn();
+        $conn = $connection->getConn();
+
+        $sql = "DELETE FROM categorias WHERE idcategoria = ".$this->idcategoria;
+
+        try {
+            $stmt = $conn->query($sql);
+            return true;
+        } catch (Exception $erro) {
+            $this->erro = $erro->getMessage();
             return false;
         } finally {
             $conn->close();

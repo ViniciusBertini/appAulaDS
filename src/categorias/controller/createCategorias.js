@@ -1,4 +1,20 @@
 $(document).ready(function() {
+    $('.btn-new').click(function(e) {
+        e.preventDefault()
+
+        $('.modal-title').empty()
+        $('.modal-body').empty()
+        $('.modal-title').append('<h3 class="mb-0">Nova categoria</h3>')
+
+        const datacriacao = new Date().toLocaleString()
+
+        $('.modal-body').load('src/categorias/view/formCategorias.html', function() {
+            $('#dataagora').val(datacriacao)
+        })
+        $('.btn-save').show()
+        $('#modalCategoria').modal('show')
+    })
+
     $('.btn-save').click(function(e) {
         e.preventDefault()
 

@@ -27,7 +27,7 @@ $(document).ready(function() {
                 "serchable": false,
                 "className": "text-center",
                 "render": function(data, type, row, meta) {
-                    return data == 's' ? 'Ativo' : 'Não Ativo'
+                    return data == 's' ? 'Ativo' : 'Não ativo'
                 }
             },
             {

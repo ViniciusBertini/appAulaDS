@@ -3,6 +3,7 @@ include_once('categorias.php');
 
 if (!empty($_REQUEST['nome'])) {
     $categorias = new Categorias();
+    $categorias->__set('idcategoria', $_REQUEST['idcategoria']);
     $categorias->__set('nome', utf8_decode($_REQUEST['nome']));
     if (isset($_REQUEST['ativo'])) {
         $categorias->__set('ativo', 's');
@@ -10,24 +11,23 @@ if (!empty($_REQUEST['nome'])) {
         $categorias->__set('ativo', 'n');
     }
     $dataAgora = date('Y/m/d H:i:s', time());
-    $categorias->__set('datacriacao', $dataAgora);
     $categorias->__set('datamodificacao', $dataAgora);
     
-    if ($categorias->createCategorias()) {
+    if ($categorias->updateCategorias()) {
         $dados = array(
             'tipo' => 'success',
-            'mensagem' => 'Categoria criada com sucesso!'
+            'mensagem' => 'Categoria alterada com sucesso!'
         );
     } else {
         $dados = array(
             'tipo' => 'error',
-            'mensagem' => 'Ocorreu um erro ao tentar criar a categoria.'
+            'mensagem' => 'Ocorreu um erro ao tentar alterar a categoria.'
         );
     }
 } else {
     $dados = array(
         'tipo' => 'info',
-        'mensagem' => 'Você precisa preencher todos os campos'
+        'mensagem' => 'Você não pode deixar campo vazio.'
     );
 }
 
