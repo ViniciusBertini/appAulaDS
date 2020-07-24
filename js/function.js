@@ -5,7 +5,7 @@ $(document).ready(function (){
     })
     $('.clientes').click(function (){
         $('#painel').empty();
-        $('#painel').load('src/categorias/view/listCategorias.html');
+        $('#painel').load('src/clientes/view/listClientes.html');
     })
     $('.produtos').click(function (){
         $('#painel').empty();

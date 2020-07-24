@@ -4,29 +4,29 @@ $(document).ready(function() {
 
         $('.modal-title').empty()
         $('.modal-body').empty()
-        $('.modal-title').append('<h3 class="mb-0">Nova categoria</h3>')
+        $('.modal-title').append('<h3 class="mb-0">Novo Cliente</h3>')
 
         const datacriacao = new Date().toLocaleString()
 
-        $('.modal-body').load('src/categorias/view/formCategorias.html', function() {
+        $('.modal-body').load('src/clientes/view/formClientes.html', function() {
             $('#dataagora').val(datacriacao)
         })
         $('.btn-save').show()
         $('.btn-update').hide()
-        $('#modalCategoria').modal('show')
+        $('#modalCliente').modal('show')
     })
 
     $('.btn-save').click(function(e) {
         e.preventDefault()
 
-        let dados = $('#formCategoria').serialize()
+        let dados = $('#formCliente').serialize()
 
         $.ajax({
             type: 'POST',
             dataType: 'json',
             assync: true,
             data: dados,
-            url: 'src/categorias/model/createCategorias.php',
+            url: 'src/clientes/model/createClientes.php',
             success: function(dados) {
                 Swal.fire({
                     title: 'appAulaDS',
@@ -35,8 +35,8 @@ $(document).ready(function() {
                     confirmButtonText: 'OK'
                 })
 
-                $('#modalCategoria').modal('hide')
-                $('#tableCategoria').DataTable().ajax.reload()
+                $('#modalCliente').modal('hide')
+                $('#tableCliente').DataTable().ajax.reload()
             }
         })
     })

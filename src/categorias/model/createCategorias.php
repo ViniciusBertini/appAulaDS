@@ -27,7 +27,7 @@ if (!empty($_REQUEST['nome'])) {
 } else {
     $dados = array(
         'tipo' => 'info',
-        'mensagem' => 'Você precisa preencher todos os campos'
+        'mensagem' => 'Você precisa preencher todos os campos!'
     );
 }
 
